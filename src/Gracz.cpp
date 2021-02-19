@@ -10,7 +10,7 @@ Gracz::Gracz() : licznikTur(0), imie("bezimienny"), czyKoniec(false)
 
 void Gracz::ustawImie()
 {
-  cout << ">> Podaj swoje imie: ";
+  cout << ">> Podaj imie: ";
   cin >> imie;
 }
 
@@ -115,14 +115,10 @@ bool Gracz::nowaTura()
   bool czyKoniec = false;
   char odp = '\0';
   cout << "\n>> Czy koniec tury? [t/n] ";
-  cin >> odp;
-
-  while (!cin.good())
+  while (!(cin >> odp))
   {
     cout << "Podano nieprawidlowe dane. Wprowadz odpowiedz ponownie: ";
     cin.clear();
-    cin.sync();
-    cin >> odp;
   }
 
   if (odp == 't')
@@ -142,11 +138,11 @@ bool Gracz::nowaTura()
       farma.rozmnazajSwinie();
       farma.wywolajWilkaZLasu();
       farma.dodajKieszonkoweOdMamy();
-      int szynkiPozaFarma = farma.ileSwinekPozaFarma();
+      unsigned int szynkiPozaFarma = farma.ileSwinekPozaFarma();
       //odejmowanie karmy
-      if (szynkiPozaFarma >= 0) //>=, bo moze byc jeszcze piesek poza farma
+      if (szynkiPozaFarma >= 0) // >=, bo moze byc jeszcze piesek poza farma
       {
-        if (farma.odejmijKarme(szynkiPozaFarma * farma.dajGlodSwinek() + farma.dajGlodAzora()))
+        if (farma.odejmijKarme(szynkiPozaFarma * Swinka::GLOD + farma.dajGlodAzora()))
         {
           farma.wyswietlStanGry();
           Gracz::czyKoniec = true;
@@ -159,13 +155,3 @@ bool Gracz::nowaTura()
 
   return czyKoniec;
 }
-
-bool Gracz::koniec()
-{
-  return czyKoniec;
-}
-
-
-
-
-

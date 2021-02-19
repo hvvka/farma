@@ -2,10 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 
-Wilk::Wilk() : silaAtaku(0)
-{}
-
-bool Wilk::atakuj()
+bool Wilk::czyAtakuje()
 {
   srand((unsigned) time(nullptr));
   silaAtaku = rand() % 8 + 1;
@@ -15,9 +12,4 @@ bool Wilk::atakuj()
 int Wilk::dajAtak() const
 {
   return silaAtaku;
-}
-
-Wilk::~Wilk()
-{
-  silaAtaku = 0;
 }

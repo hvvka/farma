@@ -3,15 +3,13 @@
 
 class Wilk
 {
-    int silaAtaku;
 public:
-    bool atakuj();
-
-    Wilk();
-
-    ~Wilk();
+    bool czyAtakuje();
 
     int dajAtak() const;
+
+private:
+    int silaAtaku{0};
 };
 
 #endif // FARMA_WILK_H

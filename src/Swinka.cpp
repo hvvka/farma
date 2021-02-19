@@ -1,11 +1,4 @@
 #include "Swinka.h"
 
-Swinka::Swinka() : Zwierze(GLOD, KOSZT), czasRozrodu(2)
+Swinka::Swinka() : Zwierze(GLOD, KOSZT)
 {}
-
-int Swinka::nakarm()
-{
-  return glod;
-}
-
-Swinka::~Swinka() = default;

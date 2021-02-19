@@ -6,19 +6,17 @@
 class Piesek : public Zwierze
 {
 public:
-    void trenuj();
-
-    int dajLvl() const;
-
-    int dajAtak() const;
-
     Piesek();
 
-    ~Piesek();
+    void trenuj();
+
+    unsigned int dajLvl() const;
+
+    unsigned int dajAtak() const;
 
 private:
-    int silaAtaku;
-    int lvl;
+    unsigned int silaAtaku{4};
+    unsigned int lvl{1};
 };
 
 #endif // FARMA_PIESEK_H

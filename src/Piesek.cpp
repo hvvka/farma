@@ -1,29 +1,22 @@
 #include "Piesek.h"
 
-Piesek::Piesek() : Zwierze(2, 2), silaAtaku(4), lvl(1)
+Piesek::Piesek() : Zwierze(2, 2)
 {}
-
-Piesek::~Piesek()
-{
-  silaAtaku = 0;
-  glod = 0;
-  wartosc = 0;
-  lvl = 0;
-}
 
 void Piesek::trenuj()
 {
+  glod++;
   wartosc += 2;
   silaAtaku++;
   lvl++;
 }
 
-int Piesek::dajLvl() const
+unsigned int Piesek::dajLvl() const
 {
   return lvl;
 }
 
-int Piesek::dajAtak() const
+unsigned int Piesek::dajAtak() const
 {
   return silaAtaku;
 }

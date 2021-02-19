@@ -3,12 +3,12 @@
 Zwierze::Zwierze(int glod, int wartosc) : glod(glod), wartosc(wartosc)
 {}
 
-int Zwierze::dajWartosc() const
+unsigned int Zwierze::dajWartosc() const
 {
   return wartosc;
 }
 
-int Zwierze::dajGlod() const
+unsigned int Zwierze::dajGlod() const
 {
   return glod;
 }

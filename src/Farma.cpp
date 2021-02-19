@@ -1,4 +1,5 @@
 #include "Farma.h"
+#include <Wiadomosci.h>
 #include <iostream>
 
 Farma::Farma() : karma(0), pieniadz(30), pojemnoscFarmy(10)
@@ -11,9 +12,9 @@ Farma::~Farma() //wywolanie destruktorow obiektow dziedziczacych chyba nastepuje
   wilczek.~Wilk();
 }
 
-void Farma::sprzedajSwinie(int ile)      //sprzedanie Swinki
+void Farma::sprzedajSwinie(unsigned int ile)      //sprzedanie Swinki
 {
-  for (int i = 0; !tablicaSwin.empty() && i < ile; i++)
+  for (unsigned int i = 0; !tablicaSwin.empty() && i < ile; i++)
   {
     //tablicaSwin.erase(tablicaSwin.end() - 1);
     tablicaSwin.pop_back();
@@ -57,31 +58,30 @@ void Farma::rozmnazajSwinie()
   }
 }
 
-void Farma::kupSwinie(int ile)
+void Farma::kupSwinie(unsigned int ile)
 {
-  for (int i = 0; i < ile; i++)
+  unsigned int mozliwosciNabywcze;
+  unsigned int roznicaZamowienia = 0;
+  if (ile * Swinka::KOSZT > pieniadz)
   {
-    if (pieniadz < 10)
-    {
-      int tmp = ile - i;
-      if (tmp == 1)
-      {
-        cout << "Nie masz pieniedzy, zeby kupic kolejna " << tmp << " swinke.\n";
-      } else if (tmp < 5)
-      {
-        cout << "Nie masz pieniedzy, zeby kupic kolejne " << tmp << " swinki.\n";
-      } else
-      {
-        cout << "Nie masz pieniedzy, zeby kupic kolejne " << tmp << " swinek.\n";
-      }
+    mozliwosciNabywcze = pieniadz / Swinka::KOSZT;
+    roznicaZamowienia = ile - mozliwosciNabywcze;
+  } else
+  {
+    mozliwosciNabywcze = ile;
+  }
 
-      break;
-    } else
-    {
-      Swinka s;
-      tablicaSwin.push_back(s);
-      pieniadz -= 10;
-    }
+  for (unsigned int i = 0; i < mozliwosciNabywcze; i++)
+  {
+    Swinka s;
+    tablicaSwin.emplace_back(s);
+    pieniadz -= 10;
+  }
+
+  cout << Wiadomosci::zakupionoSwinie(mozliwosciNabywcze);
+  if (roznicaZamowienia > 0)
+  {
+    cout << Wiadomosci::brakFunduszyNaSwinie(roznicaZamowienia);
   }
 }
 
@@ -138,11 +138,11 @@ void Farma::wyswietlStanGry()
 
 }
 
-void Farma::kupKarme(int k) // 4 karmy kosztuje 1 pieniadz
+void Farma::kupKarme(unsigned int k) // 4 karmy kosztuje 1 pieniadz
 {
   k = k / 4;  //mozna kupic tylko wielokrotnosci 4 karmy
 
-  for (int i = 0; (i < k && pieniadz > 0); i++)
+  for (unsigned int i = 0; i < k && pieniadz > 0; i++)
   {
     karma += 4;
     pieniadz--;
@@ -151,13 +151,13 @@ void Farma::kupKarme(int k) // 4 karmy kosztuje 1 pieniadz
 
 void Farma::wywolajWilkaZLasu()
 {
-  if (wilczek.atakuj())
+  if (wilczek.czyAtakuje())
   {
     cout << "\nZostales zaataowany przez wilka!";
-    int atakWilka = wilczek.dajAtak();
+    unsigned int atakWilka = wilczek.dajAtak();
     if (atakWilka >= piesObronny.__get().dajAtak())
     {
-      int i;
+      unsigned int i;
       //kazdy punkt ataku wilka zjada jedna swinke
       for (i = 0; (i < atakWilka && !tablicaSwin.empty()); i++)
         tablicaSwin.pop_back();
@@ -166,9 +166,10 @@ void Farma::wywolajWilkaZLasu()
       piesObronny = std::nullopt;
       cout << "\nStraciles Azora. [*]";
     } else
+    {
       cout << "\nAzor pokonal wilka!";
+    }
   }
-
 }
 
 
@@ -187,21 +188,16 @@ int Farma::dajGlodAzora()
   return piesObronny.__get().dajGlod();
 }
 
-int Farma::dajGlodSwinek()
-{
-  return tablicaSwin[0].nakarm();
-}
-
 unsigned int Farma::ileSwinekPozaFarma()
 {
   return tablicaSwin.size() - pojemnoscFarmy;
 }
 
-bool Farma::odejmijKarme(int ile)
+bool Farma::odejmijKarme(unsigned int ile)
 {
   if (ile > karma)
   {
-    int nadmiar = ile - karma;
+    unsigned int nadmiar = ile - karma;
     if (pieniadz < nadmiar)
     {
       cout

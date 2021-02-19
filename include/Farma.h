@@ -17,13 +17,13 @@ public:
 
     ~Farma();
 
-    void sprzedajSwinie(int ile);
+    void sprzedajSwinie(unsigned int ile);
 
     void rozmnazajSwinie();
 
-    void kupSwinie(int ile);
+    void kupSwinie(unsigned int ile);
 
-    void kupKarme(int k);
+    void kupKarme(unsigned int k);
 
     unsigned int ileSwinekPozaFarma();
 
@@ -35,15 +35,13 @@ public:
 
     int dajGlodAzora();
 
-    int dajGlodSwinek();
-
     void wywolajWilkaZLasu();
 
     void wyswietlStanGry();
 
     unsigned int policzPunkty();
 
-    bool odejmijKarme(int ile);
+    bool odejmijKarme(unsigned int ile);
 
     void dodajKieszonkoweOdMamy();
 
@@ -51,9 +49,9 @@ private:
     vector<Swinka> tablicaSwin;
     std::optional<Piesek> piesObronny;
     Wilk wilczek;
-    int karma;
-    int pieniadz;
-    int pojemnoscFarmy;
+    unsigned int karma;
+    unsigned int pieniadz;
+    unsigned int pojemnoscFarmy;
 };
 
 #endif //FARMA_FARMA_H
