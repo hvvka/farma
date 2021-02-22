@@ -16,7 +16,7 @@ unsigned int Piesek::dajLvl() const
   return lvl;
 }
 
-unsigned int Piesek::dajAtak() const
+unsigned int Piesek::dajSileAtaku() const
 {
   return silaAtaku;
 }

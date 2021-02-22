@@ -10,8 +10,12 @@ void Gra::start()
   gracz.ustawImie();
   do
   {
-    gracz.handluj();
-  } while (gracz.nowaTura());
+    do
+    {
+      gracz.handluj();
+    } while (!gracz.nowaTura());
+    running = gracz.czyKoniec();
+  } while (!running);
 }
 
 Gra::~Gra()

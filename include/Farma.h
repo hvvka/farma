@@ -13,9 +13,10 @@ using namespace std;
 class Farma
 {
 public:
-    Farma();
+    static const int WYSOKOSC_KIESZONKOWEGO = 10;
+    static const int KOSZT_KARMY = 1;
 
-    ~Farma();
+    Farma();
 
     void sprzedajSwinie(unsigned int ile);
 
@@ -23,7 +24,7 @@ public:
 
     void kupSwinie(unsigned int ile);
 
-    void kupKarme(unsigned int k);
+    int kupKarme(unsigned int liczbaZamowionejKarmy, unsigned int kurs);
 
     unsigned int ileSwinekPozaFarma();
 
@@ -31,9 +32,9 @@ public:
 
     void ulepszPsa();
 
-    int dajAtakPsa();
+    unsigned int dajSileAtakuPsa();
 
-    int dajGlodAzora();
+    unsigned int dajGlodAzora();
 
     void wywolajWilkaZLasu();
 
@@ -41,10 +42,11 @@ public:
 
     unsigned int policzPunkty();
 
-    bool odejmijKarme(unsigned int ile);
+    bool nakarmZwierzeta(unsigned int liczbaJednostekPotrzebnejKarmy);
 
     void dodajKieszonkoweOdMamy();
 
+    unsigned int dajPieniadz() const;
 private:
     vector<Swinka> tablicaSwin;
     std::optional<Piesek> piesObronny;

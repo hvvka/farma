@@ -15,12 +15,12 @@ public:
 
     void handluj();
 
-    bool koniec();
+    bool czyKoniec() const;
 
 private:
     int licznikTur;
     std::string imie;
-    bool czyKoniec;
+    bool koniec{false};
     Farma farma;
 };
 

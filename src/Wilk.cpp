@@ -9,7 +9,7 @@ bool Wilk::czyAtakuje()
   return rand() % 2;
 }
 
-int Wilk::dajAtak() const
+int Wilk::dajSileAtaku() const
 {
   return silaAtaku;
 }

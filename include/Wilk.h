@@ -6,7 +6,7 @@ class Wilk
 public:
     bool czyAtakuje();
 
-    int dajAtak() const;
+    int dajSileAtaku() const;
 
 private:
     int silaAtaku{0};

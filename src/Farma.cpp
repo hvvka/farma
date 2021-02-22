@@ -5,14 +5,7 @@
 Farma::Farma() : karma(0), pieniadz(30), pojemnoscFarmy(10)
 {}
 
-Farma::~Farma() //wywolanie destruktorow obiektow dziedziczacych chyba nastepuje automatycznie - sprawdzic
-{
-  tablicaSwin.clear();
-  piesObronny = std::nullopt;
-  wilczek.~Wilk();
-}
-
-void Farma::sprzedajSwinie(unsigned int ile)      //sprzedanie Swinki
+void Farma::sprzedajSwinie(unsigned int ile)      // sprzedanie Swinki
 {
   for (unsigned int i = 0; !tablicaSwin.empty() && i < ile; i++)
   {
@@ -127,7 +120,7 @@ void Farma::wyswietlStanGry()
   {
     cout << endl << "\tPies Azor" << endl;
     cout << "\tLevel: " << piesObronny.__get().dajLvl() << endl;
-    cout << "\tSila ataku: " << piesObronny.__get().dajAtak() << endl;
+    cout << "\tSila ataku: " << piesObronny.__get().dajSileAtaku() << endl;
     cout << "\tGlod: " << piesObronny.__get().dajGlod() << endl;
     cout << "\tWartosc: " << piesObronny.__get().dajWartosc() << endl;
   }
@@ -138,88 +131,107 @@ void Farma::wyswietlStanGry()
 
 }
 
-void Farma::kupKarme(unsigned int k) // 4 karmy kosztuje 1 pieniadz
-{
-  k = k / 4;  //mozna kupic tylko wielokrotnosci 4 karmy
-
-  for (unsigned int i = 0; i < k && pieniadz > 0; i++)
-  {
-    karma += 4;
-    pieniadz--;
-  }
-}
-
 void Farma::wywolajWilkaZLasu()
 {
-  if (wilczek.czyAtakuje())
+  if (!wilczek.czyAtakuje())
   {
-    cout << "\nZostales zaataowany przez wilka!";
-    unsigned int atakWilka = wilczek.dajAtak();
-    if (atakWilka >= piesObronny.__get().dajAtak())
-    {
-      unsigned int i;
-      //kazdy punkt ataku wilka zjada jedna swinke
-      for (i = 0; (i < atakWilka && !tablicaSwin.empty()); i++)
-        tablicaSwin.pop_back();
+    return;
+  }
 
-      cout << "\nStraciles " << i << " swinek.";
-      piesObronny = std::nullopt;
-      cout << "\nStraciles Azora. [*]";
+  cout << "Zostales zaataowany przez wilka!" << endl;
+  unsigned int silaAtakuWilka = wilczek.dajSileAtaku();
+  if (dajSileAtakuPsa() >= silaAtakuWilka)
+  {
+    cout << "Azor pokonal wilka!" << endl;
+  } else
+  {
+    unsigned int liczbaStraconychSwinek;
+    if (silaAtakuWilka >= tablicaSwin.size())
+    {
+      liczbaStraconychSwinek = tablicaSwin.size();
+      tablicaSwin.clear();
     } else
     {
-      cout << "\nAzor pokonal wilka!";
+      liczbaStraconychSwinek = silaAtakuWilka;
+      tablicaSwin.erase(tablicaSwin.begin(), tablicaSwin.begin() + silaAtakuWilka);
     }
+
+    cout << "Straciles " << liczbaStraconychSwinek << " swinek." << endl;
+    piesObronny = std::nullopt;
+    cout << "Straciles Azora. [*]" << endl;
   }
 }
-
 
 unsigned int Farma::policzPunkty()
 {
-  return 10 * tablicaSwin.size() + pieniadz;
+  return Swinka::KOSZT * tablicaSwin.size() + pieniadz;
 }
 
-int Farma::dajAtakPsa()
+unsigned int Farma::dajSileAtakuPsa()
 {
-  return piesObronny.__get().dajAtak();
+  if (!piesObronny.has_value())
+  {
+    return 0;
+  }
+  return piesObronny.__get().dajSileAtaku();
 }
 
-int Farma::dajGlodAzora()
+unsigned int Farma::dajGlodAzora()
 {
+  if (!piesObronny.has_value())
+  {
+    return 0;
+  }
   return piesObronny.__get().dajGlod();
 }
 
 unsigned int Farma::ileSwinekPozaFarma()
 {
+  if (tablicaSwin.size() <= pojemnoscFarmy)
+  {
+    return 0;
+  }
   return tablicaSwin.size() - pojemnoscFarmy;
 }
 
-bool Farma::odejmijKarme(unsigned int ile)
+bool Farma::nakarmZwierzeta(unsigned int liczbaJednostekPotrzebnejKarmy)
 {
-  if (ile > karma)
+  karma -= liczbaJednostekPotrzebnejKarmy;
+  if (karma < 0)
   {
-    unsigned int nadmiar = ile - karma;
-    if (pieniadz < nadmiar)
+    int kosztZakupionejKarmy = kupKarme(-karma, 2);
+    cout << "Aby wyzywic swinki zostala naliczona karna karma, ktora kosztowala $" << kosztZakupionejKarmy << "."
+         << endl;
+    if (kosztZakupionejKarmy == 0)
     {
-      cout
-              << "\nMiales za malo karmy na wykarmienie swinek i jednoczesnie za malo pieniedzy na kupno karmy po gorszym kursie.\nZOSTALES BANKRUTEM.\n";
       return true;
     }
-    pieniadz -= nadmiar; //karne odejmowanie pieniedzy, za brak karmy, karma 4x drozsza niz normlanie
-
-    cout << "\nAby wyzywic swinki zostala naliczona karna karma, ktora kosztowala $" << nadmiar << "." << endl;
-    ile -= nadmiar;
-
   }
-  karma -= ile;
-
   return false;
+}
 
+int Farma::kupKarme(unsigned int liczbaZamowionejKarmy, unsigned int kurs)
+{
+  unsigned int kosztZamowionejKarmy = liczbaZamowionejKarmy * KOSZT_KARMY * kurs;
+  if (kosztZamowionejKarmy > pieniadz)
+  {
+    cout << "Nie masz wystarczajaych funduszy na zakup karmy." << endl;
+    return 0;
+  }
+  pieniadz -= kosztZamowionejKarmy;
+  karma += liczbaZamowionejKarmy;
+  return kosztZamowionejKarmy;
 }
 
 void Farma::dodajKieszonkoweOdMamy()
 {
-  pieniadz += 10;
-  cout << "\nMama wysyla przelew na $10.\n";
+  pieniadz += WYSOKOSC_KIESZONKOWEGO;
+  cout << "Mama wysyla przelew na $10." << endl;
+}
+
+unsigned int Farma::dajPieniadz() const
+{
+  return pieniadz;
 }
 
 

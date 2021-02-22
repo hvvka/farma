@@ -12,7 +12,7 @@ public:
 
     unsigned int dajLvl() const;
 
-    unsigned int dajAtak() const;
+    unsigned int dajSileAtaku() const;
 
 private:
     unsigned int silaAtaku{4};
