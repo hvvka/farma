@@ -90,11 +90,11 @@ void Farma::kupPsa()
 
 void Farma::ulepszPsa()
 {
-  if (piesObronny.__get().dajLvl() < 6 && piesObronny.__get().dajWartosc() + 2 <= pieniadz)
+  if (piesObronny->dajLvl() < 6 && piesObronny->dajWartosc() + 2 <= pieniadz)
   {
-    piesObronny.__get().trenuj();
-    pieniadz -= piesObronny.__get().dajWartosc();
-  } else if (piesObronny.__get().dajLvl() == 6)
+    piesObronny->trenuj();
+    pieniadz -= piesObronny->dajWartosc();
+  } else if (piesObronny->dajLvl() == 6)
   {
     cout << "\nTwoj Azor juz osiagnal najwyzszy stopien rozwoju.\n";
   } else
@@ -108,21 +108,21 @@ void Farma::wyswietlStanGry()
   cout << endl << "OTO TWOJA FARMA:" << endl;
   cout << endl << "\tZWIERZETA NA FARMIE" << endl;
   cout << "\tLiczba Swinek: " << tablicaSwin.size() << endl;
-  if (int(tablicaSwin.size() - pojemnoscFarmy) >= 0 && piesObronny.__get().dajWartosc() != 0)
+  if (int(tablicaSwin.size() - pojemnoscFarmy) >= 0 && piesObronny->dajWartosc() != 0)
   {
     cout << "\tW tym liczba swinek poza farma: " << tablicaSwin.size() - pojemnoscFarmy + 1 << endl;
   }
-  if (int(tablicaSwin.size() - pojemnoscFarmy) > 0 && piesObronny.__get().dajWartosc() == 0)
+  if (int(tablicaSwin.size() - pojemnoscFarmy) > 0 && piesObronny->dajWartosc() == 0)
   {
     cout << "\tW tym liczba swinek poza farma: " << tablicaSwin.size() - pojemnoscFarmy << endl;
   }
-  if (piesObronny.__get().dajWartosc())
+  if (piesObronny->dajWartosc())
   {
     cout << endl << "\tPies Azor" << endl;
-    cout << "\tLevel: " << piesObronny.__get().dajLvl() << endl;
-    cout << "\tSila ataku: " << piesObronny.__get().dajSileAtaku() << endl;
-    cout << "\tGlod: " << piesObronny.__get().dajGlod() << endl;
-    cout << "\tWartosc: " << piesObronny.__get().dajWartosc() << endl;
+    cout << "\tLevel: " << piesObronny->dajLvl() << endl;
+    cout << "\tSila ataku: " << piesObronny->dajSileAtaku() << endl;
+    cout << "\tGlod: " << piesObronny->dajGlod() << endl;
+    cout << "\tWartosc: " << piesObronny->dajWartosc() << endl;
   }
 
   cout << endl << "\tZASOBY" << endl;
@@ -173,7 +173,7 @@ unsigned int Farma::dajSileAtakuPsa()
   {
     return 0;
   }
-  return piesObronny.__get().dajSileAtaku();
+  return piesObronny->dajSileAtaku();
 }
 
 unsigned int Farma::dajGlodAzora()
@@ -182,7 +182,7 @@ unsigned int Farma::dajGlodAzora()
   {
     return 0;
   }
-  return piesObronny.__get().dajGlod();
+  return piesObronny->dajGlod();
 }
 
 unsigned int Farma::ileSwinekPozaFarma()
