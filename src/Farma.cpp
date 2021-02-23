@@ -13,7 +13,9 @@ void Farma::sprzedajSwinie(unsigned int ile)      // sprzedanie Swinki
     tablicaSwin.pop_back();
     pieniadz += 10;
     if (tablicaSwin.empty() && ile > i)
+    {
       cout << "Podales zbyt duza liczbe. Nie masz juz zadnej Swinki w zagrodzie.\n";
+    }
   }
 /*
     int i = 0;
@@ -85,7 +87,9 @@ void Farma::kupPsa()
     piesObronny = std::optional<Piesek>{Piesek()};
     pieniadz -= 2;
   } else
+  {
     cout << "Nie stac cie na Azora." << endl;
+  }
 }
 
 void Farma::ulepszPsa()

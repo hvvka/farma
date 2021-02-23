@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Wiadomosci.h"
 
 std::string Wiadomosci::brakFunduszyNaSwinie(unsigned int liczbaSwin)
@@ -27,3 +28,16 @@ std::string Wiadomosci::zakupionoSwinie(unsigned int ile)
     return "Zakupiono " + std::to_string(ile) + " swinek.\n";
   }
 }
+
+int Wiadomosci::pobierzLiczbeOdUzytkownika()
+{
+  int liczba;
+  while (!(std::cin >> liczba))
+  {
+    std::cout << "Niepoprawna liczba. Wprowadz dane ponownie." << std::endl;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  }
+  return liczba;
+}
+
