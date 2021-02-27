@@ -5,31 +5,17 @@
 Farma::Farma() : karma(0), pieniadz(30), pojemnoscFarmy(10)
 {}
 
-void Farma::sprzedajSwinie(unsigned int ile)      // sprzedanie Swinki
+void Farma::sprzedajSwinie(unsigned int ile)
 {
   for (unsigned int i = 0; !tablicaSwin.empty() && i < ile; i++)
   {
-    //tablicaSwin.erase(tablicaSwin.end() - 1);
     tablicaSwin.pop_back();
-    pieniadz += 10;
+    pieniadz += Swinka::KOSZT;
     if (tablicaSwin.empty() && ile > i)
     {
       cout << "Podales zbyt duza liczbe. Nie masz juz zadnej Swinki w zagrodzie.\n";
     }
   }
-/*
-    int i = 0;
-    vector <Swinka>::iterator it_tablicaSwin = tablicaSwin.begin();
-    while(it_tablicaSwin != tablicaSwin.end() && i < ile)
-    {
-        tablicaSwin.erase(it_tablicaSwin++);
-        pieniadz += 4;
-        i++;
-    }
-
-    if (tablicaSwin.empty() && ile > i)
-        cout << "Podales za duza liczbe. Nie masz juz zadnej Swinki w zagrodzie.\n";
-*/
 }
 
 void Farma::rozmnazajSwinie()
@@ -82,10 +68,10 @@ void Farma::kupSwinie(unsigned int ile)
 
 void Farma::kupPsa()
 {
-  if (pieniadz >= 2)
+  if (pieniadz >= Piesek::CENA_KUPNA)
   {
     piesObronny = std::optional<Piesek>{Piesek()};
-    pieniadz -= 2;
+    pieniadz -= Piesek::CENA_KUPNA;
   } else
   {
     cout << "Nie stac cie na Azora." << endl;
@@ -94,16 +80,16 @@ void Farma::kupPsa()
 
 void Farma::ulepszPsa()
 {
-  if (piesObronny->dajLvl() < 6 && piesObronny->dajWartosc() + 2 <= pieniadz)
+  if (piesObronny->dajLvl() >= Piesek::MAX_LVL)
   {
-    piesObronny->trenuj();
-    pieniadz -= piesObronny->dajWartosc();
-  } else if (piesObronny->dajLvl() == 6)
+    cout << "Twoj Azor osiagnal juz najwyzszy stopien rozwoju.\n";
+  } else if (piesObronny->dajCeneTreninguAzora() <= pieniadz)
   {
-    cout << "\nTwoj Azor juz osiagnal najwyzszy stopien rozwoju.\n";
+    cout << "Treningi Azora są dla ciebie zbyt kosztowne w tej chwili.\n";
   } else
   {
-    cout << "Treningi Azora są zbyt kosztowne dla ciebie w tej chwili.\n";
+    piesObronny->trenuj();
+    pieniadz -= piesObronny->dajCeneTreninguAzora();
   }
 }
 
@@ -120,7 +106,7 @@ void Farma::wyswietlStanGry()
   {
     cout << "\tW tym liczba swinek poza farma: " << tablicaSwin.size() - pojemnoscFarmy << endl;
   }
-  if (piesObronny->dajWartosc())
+  if (czyJestPies())
   {
     cout << endl << "\tPies Azor" << endl;
     cout << "\tLevel: " << piesObronny->dajLvl() << endl;
@@ -132,7 +118,7 @@ void Farma::wyswietlStanGry()
   cout << endl << "\tZASOBY" << endl;
   cout << "\tPieniadze: $" << pieniadz << endl;
   cout << "\tKarma: " << karma << endl;
-
+  cout << endl;
 }
 
 void Farma::wywolajWilkaZLasu()
@@ -173,7 +159,7 @@ unsigned int Farma::policzPunkty()
 
 unsigned int Farma::dajSileAtakuPsa()
 {
-  if (!piesObronny.has_value())
+  if (!czyJestPies())
   {
     return 0;
   }
@@ -182,12 +168,15 @@ unsigned int Farma::dajSileAtakuPsa()
 
 unsigned int Farma::dajGlodAzora()
 {
-  if (!piesObronny.has_value())
+  if (!czyJestPies())
   {
     return 0;
   }
   return piesObronny->dajGlod();
 }
+
+bool Farma::czyJestPies() const
+{ return piesObronny.has_value(); }
 
 unsigned int Farma::ileSwinekPozaFarma()
 {
@@ -214,7 +203,7 @@ bool Farma::nakarmZwierzeta(unsigned int liczbaJednostekPotrzebnejKarmy)
   return false;
 }
 
-int Farma::kupKarme(unsigned int liczbaZamowionejKarmy, unsigned int kurs)
+unsigned int Farma::kupKarme(unsigned int liczbaZamowionejKarmy, unsigned int kurs)
 {
   unsigned int kosztZamowionejKarmy = liczbaZamowionejKarmy * KOSZT_KARMY * kurs;
   if (kosztZamowionejKarmy > pieniadz)
@@ -231,11 +220,6 @@ void Farma::dodajKieszonkoweOdMamy()
 {
   pieniadz += WYSOKOSC_KIESZONKOWEGO;
   cout << "Mama wysyla przelew na $10." << endl;
-}
-
-unsigned int Farma::dajPieniadz() const
-{
-  return pieniadz;
 }
 
 

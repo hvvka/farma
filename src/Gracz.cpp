@@ -22,11 +22,15 @@ void Gracz::handluj()
   bool czyZakonczonoTure = true;
   while (czyZakonczonoTure)
   {
-    !farma.dajSileAtakuPsa() ?
-    cout
-            << "\nCo chcesz zrobić?\n1. Kupic swinki ($10).\n2. Kupic pieska ($2).\n3. Sprzedac swinki.\n4. Kupic karme ($0.25).\n5. Zakonczyc ture.\n"
-                             : cout
-            << "\nCo chcesz zrobić?\n1. Kupic swinki ($10).\n2. Ulepszyc pieska.\n3. Sprzedac swinki.\n4. Kupic karme ($0.25).\n5. Zakonczyc ture.\n";
+    if (!farma.czyJestPies())
+    {
+      cout
+              << "Co chcesz zrobić?\n1. Kupic swinki ($10).\n2. Kupic pieska ($2).\n3. Sprzedac swinki.\n4. Kupic karme ($1).\n5. Zakonczyc ture.\n";
+    } else
+    {
+      cout
+              << "Co chcesz zrobić?\n1. Kupic swinki ($10).\n2. Ulepszyc pieska.\n3. Sprzedac swinki.\n4. Kupic karme ($1).\n5. Zakonczyc ture.\n";
+    }
 
     int wybor = Wiadomosci::pobierzLiczbeOdUzytkownika();
     switch (wybor)
@@ -42,7 +46,7 @@ void Gracz::handluj()
 
       case 2:
       {
-        if (!farma.dajSileAtakuPsa())
+        if (!farma.czyJestPies())
         {
           farma.kupPsa();
         } else
@@ -102,7 +106,7 @@ bool Gracz::nowaTura()
     return false;
   }
   licznikTur++;
-  if (licznikTur == 5) // czyKoniec calej gry
+  if (licznikTur == LICZBA_TUR) // czyKoniec calej gry
   {
     farma.wyswietlStanGry();
     Gracz::koniec = true;

@@ -7,6 +7,8 @@
 class Gracz
 {
 public:
+    static const int LICZBA_TUR = 5;
+
     Gracz();
 
     void ustawImie();

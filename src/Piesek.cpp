@@ -20,3 +20,6 @@ unsigned int Piesek::dajSileAtaku() const
 {
   return silaAtaku;
 }
+
+unsigned int Piesek::dajCeneTreninguAzora() const
+{ return wartosc + 2; }

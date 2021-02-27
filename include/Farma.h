@@ -24,7 +24,7 @@ public:
 
     void kupSwinie(unsigned int ile);
 
-    int kupKarme(unsigned int liczbaZamowionejKarmy, unsigned int kurs);
+    unsigned int kupKarme(unsigned int liczbaZamowionejKarmy, unsigned int kurs);
 
     unsigned int ileSwinekPozaFarma();
 
@@ -46,7 +46,7 @@ public:
 
     void dodajKieszonkoweOdMamy();
 
-    unsigned int dajPieniadz() const;
+    bool czyJestPies() const;
 private:
     vector<Swinka> tablicaSwin;
     std::optional<Piesek> piesObronny;

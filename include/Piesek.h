@@ -6,6 +6,9 @@
 class Piesek : public Zwierze
 {
 public:
+    static const int CENA_KUPNA = 10;
+    static const int MAX_LVL = 6;
+
     Piesek();
 
     void trenuj();
@@ -13,6 +16,8 @@ public:
     unsigned int dajLvl() const;
 
     unsigned int dajSileAtaku() const;
+
+    unsigned int dajCeneTreninguAzora() const;
 
 private:
     unsigned int silaAtaku{4};
