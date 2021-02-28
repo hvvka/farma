@@ -7,7 +7,7 @@ class Swinka : public Zwierze
 {
 public:
     static const int KOSZT = 10;
-    static const int GLOD = 4;
+    static const int GLOD = 1;
 
     Swinka();
 

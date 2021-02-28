@@ -8,8 +8,6 @@
 #include <vector>
 #include <optional>
 
-using namespace std;
-
 class Farma
 {
 public:
@@ -42,13 +40,13 @@ public:
 
     unsigned int policzPunkty();
 
-    bool nakarmZwierzeta(unsigned int liczbaJednostekPotrzebnejKarmy);
+    bool nakarmZwierzeta(unsigned int liczbaPotrzebnejKarmy);
 
     void dodajKieszonkoweOdMamy();
 
     bool czyJestPies() const;
 private:
-    vector<Swinka> tablicaSwin;
+    std::vector<Swinka> tablicaSwin;
     std::optional<Piesek> piesObronny;
     Wilk wilczek;
     unsigned int karma;

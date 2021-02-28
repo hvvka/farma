@@ -6,7 +6,7 @@
 class Piesek : public Zwierze
 {
 public:
-    static const int CENA_KUPNA = 10;
+    static const int CENA_KUPNA = 2;
     static const int MAX_LVL = 6;
 
     Piesek();
