@@ -16,7 +16,7 @@ void Gracz::ustawImie()
 void Gracz::handluj()
 {
   std::cout << std::endl;
-  std::cout << "***TURA " << licznikTur + 1 << "***" << std::endl;
+  printf("\033[3;46;97m*** TURA %d ***\033[0m\t\t", licznikTur + 1);
   farma.wyswietlStanGry();
   bool czyTuraTrwa = true;
   while (czyTuraTrwa)
@@ -89,31 +89,28 @@ bool Gracz::nowaTura()
   {
     return false;
   }
-  if (licznikTur++ == LICZBA_TUR) // czyKoniec calej gry
+  if (++licznikTur == LICZBA_TUR) // czyKoniec calej gry
   {
     farma.wyswietlStanGry();
     Gracz::koniec = true;
     std::cout << "Koniec gry." << std::endl << "Wygrana!" << std::endl << "Zagrano " << licznikTur << " tur."
               << std::endl;
     std::cout << imie << " z wynikiem " << farma.policzPunkty() << " punktow." << std::endl;
-  } else                // kolejna tura
+    std::cout << Wiadomosci::asciiSwinka();
+  } else // kolejna tura
   {
     farma.rozmnazajSwinie();
     farma.wywolajWilkaZLasu();
     farma.dodajKieszonkoweOdMamy();
     unsigned int szynkiPozaFarma = farma.ileSwinekPozaFarma();
-    // odejmowanie karmy
-    if (szynkiPozaFarma > 0 || farma.czyJestPies()) // >=, bo moze byc jeszcze piesek poza farma
+    unsigned int glodZwierzat = szynkiPozaFarma * Swinka::GLOD + farma.dajGlodAzora();
+    if (!farma.nakarmZwierzeta(glodZwierzat))
     {
-      unsigned int glodZwierzat = szynkiPozaFarma * Swinka::GLOD + farma.dajGlodAzora();
-      if (!farma.nakarmZwierzeta(glodZwierzat))
-      {
-        farma.wyswietlStanGry();
-        Gracz::koniec = true;
-        std::cout << "Koniec gry." << std::endl << "Porazka!" << std::endl << "Zagrano " << licznikTur << " tur."
-                  << std::endl;
-        std::cout << imie << " z wynikiem " << farma.policzPunkty() << " punktow." << std::endl;
-      }
+      farma.wyswietlStanGry();
+      Gracz::koniec = true;
+      std::cout << "Koniec gry." << std::endl << "Porazka!" << std::endl << "Zagrano " << licznikTur << " tur."
+                << std::endl;
+      std::cout << imie << " z wynikiem " << farma.policzPunkty() << " punktow." << std::endl;
     }
   }
   return true;

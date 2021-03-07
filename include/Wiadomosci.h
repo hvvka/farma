@@ -12,6 +12,10 @@ namespace Wiadomosci
     int pobierzLiczbeOdUzytkownika();
 
     std::string wybierzAkcje(bool czyJestPies, unsigned int cenaTreninguAzora);
+
+    std::string odmienSwinie(unsigned int ile);
+
+    std::string asciiSwinka();
 }
 
 #endif //FARMA_WIADOMOSCI_H

@@ -7,30 +7,24 @@
 
 std::string Wiadomosci::brakFunduszyNaSwinie(unsigned int liczbaSwin)
 {
-  if (liczbaSwin == 1)
-  {
-    return "Nie masz pieniedzy, zeby kupic kolejna " + std::to_string(liczbaSwin) + " swinke.";
-  } else if (liczbaSwin <= 4)
-  {
-    return "Nie masz pieniedzy, zeby kupic kolejne " + std::to_string(liczbaSwin) + " swinki.";
-  } else
-  {
-    return "Nie masz pieniedzy, zeby kupic kolejne " + std::to_string(liczbaSwin) + " swinek.";
-  }
+  return "Nie masz wystarczajaco pieniedzy, zeby kupic " + std::to_string(liczbaSwin) + " " + odmienSwinie(liczbaSwin);
 }
 
 std::string Wiadomosci::zakupionoSwinie(unsigned int ile)
 {
+  return "Zakupiono " + std::to_string(ile) + " " + odmienSwinie(ile);
+}
+
+std::string Wiadomosci::odmienSwinie(unsigned int ile)
+{
   if (ile == 1)
   {
-    return "Zakupiono " + std::to_string(ile) + " swinke.";
+    return "swinke.";
   } else if (ile <= 4)
   {
-    return "Zakupiono " + std::to_string(ile) + " swinki.";
-  } else
-  {
-    return "Zakupiono " + std::to_string(ile) + " swinek.";
+    return "swinki.";
   }
+  return "swinek.";
 }
 
 int Wiadomosci::pobierzLiczbeOdUzytkownika()
@@ -61,4 +55,34 @@ std::string Wiadomosci::wybierzAkcje(bool czyJestPies, unsigned int cenaTreningu
   menuAkcji << "4. Kupic karme (-$" << Farma::KOSZT_KARMY << ")." << std::endl;
   menuAkcji << "5. Zakonczyc ture." << std::endl;
   return menuAkcji.str();
+}
+
+std::string Wiadomosci::asciiSwinka()
+{
+  return "         ___\n"
+         "         ',_`\"\"\\        .---,\n"
+         "            \\   :-\"\"``/`    |\n"
+         "             `;'     //`\\   /\n"
+         "             /   __     |   ('.\n"
+         "            |_ ./O)\\     \\  `) \\\n"
+         "           _/-.    `      `\"`  |`-.\n"
+         "       .-=; `                  /   `-.\n"
+         "      /o o \\   ,_,           .        '.\n"
+         "      L._._;_.-'           .            `'-.\n"
+         "        `'-.`             '                 `'-.\n"
+         "            `.         '                        `-._\n"
+         "              '-._. -'                              '.\n"
+         "                 \\                                    `\\\n"
+         "                  |                                     \\\n"
+         "                  |    |                                 ;   _.\n"
+         "                  \\    |           |                     |-.((\n"
+         "                   ;.  \\           /    /                |-.`\\)\n"
+         "                   | '. ;         /    |                 |(_) )\n"
+         "                   |   \\ \\       /`    |                 ;'--'\n"
+         "                    \\   '.\\    /`      |                /\n"
+         "                     |   /`|  ;        \\               /\n"
+         "                     |  |  |  |-._      '.           .'\n"
+         "                     /  |  |  |__.`'---\"_;'-.     .-'\n"
+         "                    //__/  /  |    .-'``     _.-'`\n"
+         "                          //__/   //___.--''`";
 }
