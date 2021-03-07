@@ -10,8 +10,7 @@ void Farma::sprzedajSwinie(unsigned int ile)
   if (tablicaSwin.size() < ile)
   {
     std::cout << "Podales zbyt duza liczbe. Sprzedano " << tablicaSwin.size()
-              << " Swinek."
-              << std::endl;
+              << " Swinek.\n";
   }
   for (unsigned int i = 0; !tablicaSwin.empty() && i < ile; i++)
   {
@@ -86,7 +85,7 @@ void Farma::ulepszPsa()
   if (piesObronny->dajLvl() >= Piesek::MAX_LVL)
   {
     std::cout << "Twoj Azor osiagnal juz najwyzszy stopien rozwoju." << std::endl;
-  } else if (piesObronny->dajCeneTreninguAzora() >= pieniadz)
+  } else if (piesObronny->dajCeneTreninguAzora() > pieniadz)
   {
     std::cout << "Treningi Azora są dla ciebie zbyt kosztowne w tej chwili." << std::endl;
   } else
@@ -237,6 +236,3 @@ unsigned int Farma::obliczKosztTreninguAzora()
 {
   return piesObronny->dajCeneTreninguAzora();
 }
-
-
-
