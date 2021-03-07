@@ -13,6 +13,8 @@ namespace Wiadomosci
 
     std::string wybierzAkcje(bool czyJestPies, unsigned int cenaTreninguAzora);
 
+    std::string urodzonoSwinie(unsigned int ile);
+
     std::string odmienSwinie(unsigned int ile);
 
     std::string asciiSwinka();

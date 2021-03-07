@@ -21,24 +21,13 @@ void Farma::sprzedajSwinie(unsigned int ile)
 
 void Farma::rozmnazajSwinie()
 {
-  unsigned int nowyMiot = tablicaSwin.size() / 2;
-  for (unsigned int i = 0; i < nowyMiot; i++)
+  unsigned int liczbaSwinWNowymMiocie = tablicaSwin.size() / 2;
+  for (unsigned int i = 0; i < liczbaSwinWNowymMiocie; i++)
   {
     Swinka s;
     tablicaSwin.push_back(s);
   }
-
-  if (nowyMiot == 1)
-  {
-    std::cout << "Urodzila sie " << nowyMiot << " swinka.";
-  } else if (nowyMiot < 5 && nowyMiot != 0)
-  {
-    std::cout << "Urodzily sie " << nowyMiot << " swinki.";
-  } else
-  {
-    std::cout << "Urodzilo sie " << nowyMiot << " swinek.";
-  }
-  std::cout << std::endl;
+  Wiadomosci::urodzonoSwinie(liczbaSwinWNowymMiocie);
 }
 
 void Farma::kupSwinie(unsigned int ile)

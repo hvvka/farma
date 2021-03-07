@@ -86,3 +86,8 @@ std::string Wiadomosci::asciiSwinka()
          "                    //__/  /  |    .-'``     _.-'`\n"
          "                          //__/   //___.--''`";
 }
+
+std::string Wiadomosci::urodzonoSwinie(unsigned int ile)
+{
+  return "Urodzono " + std::to_string(ile) + " " + odmienSwinie(ile) + "\n";
+}
