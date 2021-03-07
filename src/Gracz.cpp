@@ -15,21 +15,24 @@ void Gracz::ustawImie()
 
 void Gracz::handluj()
 {
-    std::cout << std::endl;
+  std::cout << std::endl;
   std::cout << "***TURA " << licznikTur + 1 << "***" << std::endl;
   farma.wyswietlStanGry();
   bool czyTuraTrwa = true;
   while (czyTuraTrwa)
   {
+    std::cout << "Co chcesz zrobić?" << std::endl;
+    std::cout << "1. Kupic swinki (-$" << Swinka::KOSZT << ")." << std::endl;
     if (!farma.czyJestPies())
     {
-      std::cout
-              << "Co chcesz zrobić?" << std::endl << "1. Kupic swinki ($10)." << std::endl << "2. Kupic pieska ($2)." << std::endl << "3. Sprzedac swinki." << std::endl << "4. Kupic karme ($1)." << std::endl << "5. Zakonczyc ture." << std::endl;
+      std::cout << "2. Kupic pieska (-$" << Piesek::CENA_KUPNA << ")." << std::endl;
     } else
     {
-      std::cout
-              << "Co chcesz zrobić?" << std::endl << "1. Kupic swinki ($10)." << std::endl << "2. Ulepszyc pieska." << std::endl << "3. Sprzedac swinki." << std::endl << "4. Kupic karme ($1)." << std::endl << "5. Zakonczyc ture." << std::endl;
+      std::cout << "2. Ulepszyc pieska (-$" << farma.obliczKosztTreninguAzora() << ")." << std::endl;
     }
+    std::cout << "3. Sprzedac swinki (+$" << Swinka::KOSZT << ")." << std::endl;
+    std::cout << "4. Kupic karme (-$" << Farma::KOSZT_KARMY << ")." << std::endl;
+    std::cout << "5. Zakonczyc ture." << std::endl;
 
     int wybor = Wiadomosci::pobierzLiczbeOdUzytkownika();
     switch (wybor)
@@ -82,7 +85,7 @@ void Gracz::handluj()
 
       case 5:
       {
-          czyTuraTrwa = false;
+        czyTuraTrwa = false;
         break;
       }
 
@@ -104,12 +107,12 @@ bool Gracz::nowaTura()
   {
     return false;
   }
-  licznikTur++;
-  if (licznikTur == LICZBA_TUR) // czyKoniec calej gry
+  if (licznikTur++ == LICZBA_TUR) // czyKoniec calej gry
   {
     farma.wyswietlStanGry();
     Gracz::koniec = true;
-    std::cout << "Koniec gry." << std::endl << "Wygrana!"<< std::endl << "Zagrano " << licznikTur << " tur." << std::endl;
+    std::cout << "Koniec gry." << std::endl << "Wygrana!" << std::endl << "Zagrano " << licznikTur << " tur."
+              << std::endl;
     std::cout << imie << " z wynikiem " << farma.policzPunkty() << " punktow." << std::endl;
   } else                // kolejna tura
   {
@@ -120,11 +123,13 @@ bool Gracz::nowaTura()
     // odejmowanie karmy
     if (szynkiPozaFarma > 0 || farma.czyJestPies()) // >=, bo moze byc jeszcze piesek poza farma
     {
-      if (!farma.nakarmZwierzeta(szynkiPozaFarma * Swinka::GLOD + farma.dajGlodAzora()))
+      unsigned int glodZwierzat = szynkiPozaFarma * Swinka::GLOD + farma.dajGlodAzora();
+      if (!farma.nakarmZwierzeta(glodZwierzat))
       {
         farma.wyswietlStanGry();
         Gracz::koniec = true;
-        std::cout << "Koniec gry." << std::endl << "Porazka!" << std::endl << "Zagrano " << licznikTur << " tur." << std::endl;
+        std::cout << "Koniec gry." << std::endl << "Porazka!" << std::endl << "Zagrano " << licznikTur << " tur."
+                  << std::endl;
         std::cout << imie << " z wynikiem " << farma.policzPunkty() << " punktow." << std::endl;
       }
     }

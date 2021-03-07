@@ -26,14 +26,6 @@ public:
 
     unsigned int ileSwinekPozaFarma();
 
-    void kupPsa();
-
-    void ulepszPsa();
-
-    unsigned int dajSileAtakuPsa();
-
-    unsigned int dajGlodAzora();
-
     void wywolajWilkaZLasu();
 
     void wyswietlStanGry();
@@ -44,10 +36,21 @@ public:
 
     void dodajKieszonkoweOdMamy();
 
+    void kupPsa();
+
+    void ulepszPsa();
+
+    unsigned int obliczKosztTreninguAzora();
+
+    unsigned int dajSileAtakuPsa();
+
+    unsigned int dajGlodAzora();
+
     bool czyJestPies() const;
+
 private:
-    std::vector<Swinka> tablicaSwin;
-    std::optional<Piesek> piesObronny;
+    std::vector <Swinka> tablicaSwin;
+    std::optional <Piesek> piesObronny;
     Wilk wilczek;
     unsigned int karma;
     unsigned int pieniadz;

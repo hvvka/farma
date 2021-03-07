@@ -22,4 +22,6 @@ unsigned int Piesek::dajSileAtaku() const
 }
 
 unsigned int Piesek::dajCeneTreninguAzora() const
-{ return wartosc + 2; }
+{
+  return wartosc + 2;
+}
