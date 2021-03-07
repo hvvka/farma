@@ -16,7 +16,7 @@ void Gracz::ustawImie()
 void Gracz::handluj()
 {
   std::cout << std::endl;
-  printf("\033[3;46;30m*** TURA %d ***\033[0m\t\t", licznikTur + 1);
+  printf("\033[1;96m*** TURA %d ***\033[0m\n", licznikTur + 1);
   farma.wyswietlStanGry();
   bool czyTuraTrwa = true;
   while (czyTuraTrwa)
