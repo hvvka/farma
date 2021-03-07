@@ -21,19 +21,7 @@ void Gracz::handluj()
   bool czyTuraTrwa = true;
   while (czyTuraTrwa)
   {
-    std::cout << "Co chcesz zrobić?" << std::endl;
-    std::cout << "1. Kupic swinki (-$" << Swinka::KOSZT << ")." << std::endl;
-    if (!farma.czyJestPies())
-    {
-      std::cout << "2. Kupic pieska (-$" << Piesek::CENA_KUPNA << ")." << std::endl;
-    } else
-    {
-      std::cout << "2. Ulepszyc pieska (-$" << farma.obliczKosztTreninguAzora() << ")." << std::endl;
-    }
-    std::cout << "3. Sprzedac swinki (+$" << Swinka::KOSZT << ")." << std::endl;
-    std::cout << "4. Kupic karme (-$" << Farma::KOSZT_KARMY << ")." << std::endl;
-    std::cout << "5. Zakonczyc ture." << std::endl;
-
+    std::cout << Wiadomosci::wybierzAkcje(farma.czyJestPies(), farma.obliczKosztTreninguAzora());
     int wybor = Wiadomosci::pobierzLiczbeOdUzytkownika();
     switch (wybor)
     {
@@ -53,13 +41,7 @@ void Gracz::handluj()
           farma.kupPsa();
         } else
         {
-          std::cout << ">> Czy chcesz wyslac Azora na trening? [t/n] ";
-          char czyTreningAzora;
-          std::cin >> czyTreningAzora;
-          if (czyTreningAzora == 't')
-          {
-            farma.ulepszPsa();
-          }
+          farma.ulepszPsa();
         }
         farma.wyswietlStanGry();
         break;

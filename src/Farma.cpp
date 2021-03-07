@@ -10,7 +10,7 @@ void Farma::sprzedajSwinie(unsigned int ile)
   if (tablicaSwin.size() < ile)
   {
     std::cout << "Podales zbyt duza liczbe. Sprzedano " << tablicaSwin.size()
-              << " Swinek.\n";
+              << " swinek.\n";
   }
   for (unsigned int i = 0; !tablicaSwin.empty() && i < ile; i++)
   {
@@ -100,19 +100,17 @@ void Farma::wyswietlStanGry()
   std::cout << std::endl;
   std::cout << "OTO TWOJA FARMA:" << std::endl << std::endl;
   std::cout << "\tZWIERZETA NA FARMIE" << std::endl;
-  std::cout << "\tLiczba Swinek: " << tablicaSwin.size() << std::endl;
-  if (int(tablicaSwin.size() - pojemnoscFarmy) >= 0 && piesObronny->dajWartosc() != 0)
+  std::cout << "\tLiczba swinek: " << tablicaSwin.size() - ileSwinekPozaFarma() << std::endl;
+  if (ileSwinekPozaFarma() > 0)
   {
-    std::cout << "\tW tym liczba swinek poza farma: " << tablicaSwin.size() - pojemnoscFarmy + 1 << std::endl;
-  }
-  if (int(tablicaSwin.size() - pojemnoscFarmy) > 0 && piesObronny->dajWartosc() == 0)
-  {
-    std::cout << "\tW tym liczba swinek poza farma: " << tablicaSwin.size() - pojemnoscFarmy << std::endl;
+    std::cout << "\tZWIERZETA POZA FARMA" << std::endl;
+    std::cout << "\tLiczba swinek: " << ileSwinekPozaFarma() << std::endl;
+    std::cout << "\tGlod: " << Swinka::GLOD << std::endl;
   }
   if (czyJestPies())
   {
     std::cout << std::endl;
-    std::cout << "\tPies Azor" << std::endl;
+    std::cout << "\tPIES AZOR" << std::endl;
     std::cout << "\tLevel: " << piesObronny->dajLvl() << std::endl;
     std::cout << "\tSila ataku: " << piesObronny->dajSileAtaku() << std::endl;
     std::cout << "\tGlod: " << piesObronny->dajGlod() << std::endl;
