@@ -6,7 +6,7 @@ Piesek::Piesek() : Zwierze(2, 2)
 void Piesek::trenuj()
 {
   glod++;
-  wartosc += 2;
+  wartosc += CENA_TRENINGU;
   silaAtaku++;
   lvl++;
 }
@@ -23,5 +23,5 @@ unsigned int Piesek::dajSileAtaku() const
 
 unsigned int Piesek::dajCeneTreninguAzora() const
 {
-  return wartosc + 2;
+  return wartosc + CENA_TRENINGU;
 }

@@ -20,6 +20,7 @@ public:
     unsigned int dajCeneTreninguAzora() const;
 
 private:
+    static const int CENA_TRENINGU = 2;
     unsigned int silaAtaku{4};
     unsigned int lvl{1};
 };

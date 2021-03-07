@@ -90,8 +90,8 @@ void Farma::ulepszPsa()
     std::cout << "Treningi Azora są dla ciebie zbyt kosztowne w tej chwili." << std::endl;
   } else
   {
-    piesObronny->trenuj();
     pieniadz -= piesObronny->dajCeneTreninguAzora();
+    piesObronny->trenuj();
   }
 }
 
