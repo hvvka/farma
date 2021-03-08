@@ -91,3 +91,8 @@ std::string Wiadomosci::urodzonoSwinie(unsigned int ile)
 {
   return "Urodzono " + std::to_string(ile) + " " + odmienSwinie(ile) + "\n";
 }
+
+std::string Wiadomosci::stracilesSwinie(unsigned int ile)
+{
+  return "Straciles " + std::to_string(ile) + " " + odmienSwinie(ile) + "\n";
+}

@@ -15,6 +15,8 @@ namespace Wiadomosci
 
     std::string urodzonoSwinie(unsigned int ile);
 
+    std::string stracilesSwinie(unsigned int ile);
+
     std::string odmienSwinie(unsigned int ile);
 
     std::string asciiSwinka();

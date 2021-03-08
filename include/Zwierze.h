@@ -10,8 +10,6 @@ public:
 
     unsigned int dajWartosc() const;
 
-    double podajCene() const;
-
 protected:
     unsigned int glod{0};
     unsigned int wartosc{0};

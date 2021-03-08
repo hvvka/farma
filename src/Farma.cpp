@@ -27,7 +27,7 @@ void Farma::rozmnazajSwinie()
     Swinka s;
     tablicaSwin.push_back(s);
   }
-  Wiadomosci::urodzonoSwinie(liczbaSwinWNowymMiocie);
+  std::cout << Wiadomosci::urodzonoSwinie(liczbaSwinWNowymMiocie);
 }
 
 void Farma::kupSwinie(unsigned int ile)
@@ -138,7 +138,7 @@ void Farma::wywolajWilkaZLasu()
       tablicaSwin.erase(tablicaSwin.begin(), tablicaSwin.begin() + silaAtakuWilka);
     }
 
-    std::cout << "Straciles " << liczbaStraconychSwinek << " swinek." << std::endl;
+    std::cout << Wiadomosci::stracilesSwinie(liczbaStraconychSwinek);
     if (czyJestPies())
     {
       piesObronny = std::nullopt;
@@ -184,18 +184,18 @@ unsigned int Farma::ileSwinekPozaFarma()
 
 bool Farma::nakarmZwierzeta(unsigned int liczbaPotrzebnejKarmy)
 {
-  if (liczbaPotrzebnejKarmy < karma)
+  if (liczbaPotrzebnejKarmy > karma)
   {
-    karma -= liczbaPotrzebnejKarmy;
-    return true;
+
+    unsigned int kosztDokupionejKarmy = kupKarme(liczbaPotrzebnejKarmy - karma, 2);
+    std::cout << "Aby wyzywic zwierzeta zakupiona zostala karna karma (kurs x2), ktora kosztowala $"
+              << kosztDokupionejKarmy << "." << std::endl;
+    if (kosztDokupionejKarmy > pieniadz)
+    {
+      return false;
+    }
   }
-  unsigned int kosztZakupionejKarmy = kupKarme(liczbaPotrzebnejKarmy - karma, 2);
-  std::cout << "Aby wyzywic swinki zostala naliczona karna karma, ktora kosztowala $"
-            << kosztZakupionejKarmy << "." << std::endl;
-  if (kosztZakupionejKarmy > pieniadz)
-  {
-    return false;
-  }
+  karma -= liczbaPotrzebnejKarmy;
   return true;
 }
 

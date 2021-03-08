@@ -12,8 +12,3 @@ unsigned int Zwierze::dajGlod() const
 {
   return glod;
 }
-
-double Zwierze::podajCene() const
-{
-  return wartosc * 0.8;
-}

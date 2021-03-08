@@ -95,8 +95,8 @@ bool Gracz::nowaTura()
     Gracz::koniec = true;
     std::cout << "Koniec gry." << std::endl << "Wygrana!" << std::endl << "Zagrano " << licznikTur << " tur."
               << std::endl;
-    std::cout << imie << " z wynikiem " << farma.policzPunkty() << " punktow." << std::endl;
-    std::cout << Wiadomosci::asciiSwinka();
+    std::cout << imie << " konczy z wynikiem " << farma.policzPunkty() << " punktow." << std::endl;
+    printf("\033[1;95m%s\033[0m\n", Wiadomosci::asciiSwinka().c_str());
   } else // kolejna tura
   {
     farma.rozmnazajSwinie();
