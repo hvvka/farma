@@ -8,8 +8,8 @@ public:
 
     int dajSileAtaku() const;
 
-private:
-    int silaAtaku{0};
+protected:
+    int silaAtaku{4};
 };
 
 #endif // FARMA_WILK_H

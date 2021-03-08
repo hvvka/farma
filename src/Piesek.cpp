@@ -1,6 +1,6 @@
 #include "Piesek.h"
 
-Piesek::Piesek() : Zwierze(2, 2)
+Piesek::Piesek() : Zwierze(2, 2), Wilk()
 {}
 
 void Piesek::trenuj()
@@ -14,11 +14,6 @@ void Piesek::trenuj()
 unsigned int Piesek::dajLvl() const
 {
   return lvl;
-}
-
-unsigned int Piesek::dajSileAtaku() const
-{
-  return silaAtaku;
 }
 
 unsigned int Piesek::dajCeneTreninguAzora() const

@@ -2,7 +2,7 @@
 #include <Wiadomosci.h>
 #include <iostream>
 
-Farma::Farma() : karma(0), pieniadz(30), pojemnoscFarmy(10)
+Farma::Farma() : karma(0), pieniadz(30), pojemnoscFarmy(5)
 {}
 
 void Farma::sprzedajSwinie(unsigned int ile)
@@ -94,7 +94,7 @@ void Farma::wyswietlStanGry()
   {
     std::cout << "\tZWIERZETA POZA FARMA" << std::endl;
     std::cout << "\tLiczba swinek: " << ileSwinekPozaFarma() << std::endl;
-    std::cout << "\tGlod: " << Swinka::GLOD << std::endl;
+    std::cout << "\tGlod: " << Swinka::GLOD * ileSwinekPozaFarma() << std::endl;
   }
   if (czyJestPies())
   {
