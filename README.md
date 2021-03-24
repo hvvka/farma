@@ -3,7 +3,7 @@
 Console game made while learning objective programming paradigm as a 1st year student.
 
 It has a lots of flaws which I decided to fix after Msc graduation and ~3 years of professional experience in Java. And
-it's in Polish! ¯\_(ツ)_/¯
+it's in Polish! ¯\\_(ツ)_/¯
 
 **The game is a farm simulator. One can breed pigs, buy and then upgrade a guard dog to protect the business.**
 
@@ -234,29 +234,32 @@ Koniec gry.
 Wygrana!
 Zagrano 3 tur.
 Hanuszka konczy z wynikiem 10 punktow.
-___
-',_`""\        .---,
-\   :-""``/`    |
-`;'     //`\   /
-/   __     |   ('.
-|_ ./O)\     \  `) \
+
+         ___
+         ',_`""\        .---,
+            \   :-""``/`    |
+             `;'     //`\   /
+             /   __     |   ('.
+            |_ ./O)\     \  `) \
            _/-.    `      `"`  |`-.
-.-=; `                  /   `-.
-/o o \, _, .        '.
-L._._;_.-'           .            `'-.
-`'-.`             '                 `'-.
-`.         '                        `-._
-'-._. -'                              '.
-\                                    `\
+       .-=; `                  /   `-.
+      /o o \   ,_,           .        '.
+      L._._;_.-'           .            `'-.
+        `'-.`             '                 `'-.
+            `.         '                        `-._
+              '-._. -'                              '.
+                 \                                    `\
                   |                                     \
-                  |    |;   _.
-\    |           |                     |-.((;.  \           /    /                |-.`\)
-| '. ;         /    |                 |(_) )
-|   \ \       /`    |;'--'
-\   '.\    /`      |                /
-|   /`|;        \               /
-|  |  |  |-._      '.           .'
-/  |  |  |__.`'---"_;'-.     .-'
-//__/  /  |    .-'``     _.-'`
-//__/   //___.--''`
+                  |    |                                 ;   _.
+                  \    |           |                     |-.((
+                   ;.  \           /    /                |-.`\)
+                   | '. ;         /    |                 |(_) )
+                   |   \ \       /`    |                 ;'--'
+                    \   '.\    /`      |                /
+                     |   /`|  ;        \               /
+                     |  |  |  |-._      '.           .'
+                     /  |  |  |__.`'---"_;'-.     .-'
+                    //__/  /  |    .-'``     _.-'`
+                          //__/   //___.--''`
+
 ```
